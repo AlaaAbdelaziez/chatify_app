@@ -21,4 +21,8 @@ class NavigationService {
       ),
     );
   }
+
+  void goBack() {
+    navigatorKey.currentState?.pop();
+  }
 }
