@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 //pages
 import './pages/splash_page.dart';
+import './pages/login_page.dart';
 
 //Services
 import './services/navigation_service.dart';
@@ -31,7 +32,9 @@ class MainApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 253, 245, 230),
         ),
       ),
-      // navigatorKey: NavigationService.navigatorKey,
+      navigatorKey: NavigationService.navigatorKey,
+      initialRoute: '/login',
+      routes: {'/login': (BuildContext _context) => LoginPage()},
     );
   }
 }
