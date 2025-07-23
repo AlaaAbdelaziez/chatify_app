@@ -9,4 +9,11 @@ const String USER_COLLECTION = 'Users';
 class CloudStorageService {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   CloudStorageService() {}
+  Future<String?> saveUserImageToStorage(String _id, PlatformFile _file) async {
+    try {
+      Reference _ref = _storage.ref().child(
+        'images/users/$_id/profile.${_file.extension}',
+      );
+    } catch (e) {}
+  }
 }

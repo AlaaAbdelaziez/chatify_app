@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import '../services/media_service.dart';
 import '../services/database_service.dart';
 import '../services/cloud_storage_service.dart';
+import '../services/cloudinary_storage_service.dart';
+import '../services/navigation_service.dart';
 
 //Widgets
 import '../widgets/custom_input_filed.dart';
@@ -27,15 +29,29 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   late double _deviceHeight;
   late double _deviceWidth;
+
+  late AuthenticationProvider _auth;
+  late DatabaseService _db;
+  late CloudStorageService _cloudStorageService;
+  late CloudinaryStorageService _storage;
+  late NavigationService _navigationService;
+
   String? _email;
   String? _password;
   String? _name;
+
   PlatformFile? _profileImage;
 
   final _registerFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    _auth = Provider.of<AuthenticationProvider>(context);
+    _db = GetIt.instance.get<DatabaseService>();
+    _cloudStorageService = GetIt.instance.get<CloudStorageService>();
+    _storage = GetIt.instance.get<CloudinaryStorageService>();
+    _navigationService = GetIt.instance.get<NavigationService>();
+
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     return _builUI();
@@ -142,7 +158,23 @@ class _RegisterPageState extends State<RegisterPage> {
       name: 'Register',
       height: _deviceHeight * .065,
       width: _deviceWidth * 0.35,
-      onPressed: () async {},
+      onPressed: () async {
+        if (_registerFormKey.currentState!.validate() &&
+            _profileImage != null) {
+          _registerFormKey.currentState!.save();
+          String? _uid = await _auth.registerUserUsingEmailAndPassword(
+            _email!,
+            _password!,
+          );
+          String? _imageUrl = await _storage.uploadUserImage(
+            _profileImage!,
+            _uid!,
+          );
+          await _db.CreateUser(_uid!, _email!, _name!, _imageUrl!);
+          await _auth.logout();
+          await _auth.loginWithEmailAndPassword(_email!, _password!);
+        }
+      },
     );
   }
 }
