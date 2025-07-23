@@ -1,8 +1,17 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
+
 //Widgets
 import '../widgets/custom_input_filed.dart';
 import '../widgets/rounded_button.dart';
+
+//Providers
+import '../providers/authentication_provider.dart';
+
+//Sevices
+import '../services/navigation_service.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,12 +23,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late double _deviceHeight;
   late double _deviceWidth;
+  late AuthenticationProvider _auth;
+  late NavigationService _navigation;
 
-  final _loginFormKey = GlobalKey<FormState>();
+  late final _loginFormKey = GlobalKey<FormState>();
+
+  String? _email;
+  String? _password;
+
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
+    _auth = Provider.of<AuthenticationProvider>(context);
+    _navigation = GetIt.instance.get<NavigationService>();
 
     return _buildUI();
   }
@@ -77,16 +94,24 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextFormFiled(
-              onSaved: (_value) {},
+              onSaved: (_value) {
+                setState(() {
+                  _email = _value;
+                });
+              },
               hintText: 'Email',
               regEx:
                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
               obscureText: false,
             ),
             CustomTextFormFiled(
-              onSaved: (_value) {},
+              onSaved: (_value) {
+                setState(() {
+                  _password = _value;
+                });
+              },
               hintText: 'Password',
-              regEx: r".{8,}",
+              regEx: r".{6,}",
               obscureText: true,
             ),
           ],
@@ -100,7 +125,14 @@ class _LoginPageState extends State<LoginPage> {
       name: 'Login',
       height: _deviceHeight * .065,
       width: _deviceWidth * 0.35,
-      onPressed: () {},
+      onPressed: () {
+        if (_loginFormKey.currentState!.validate()) {
+          //  print("Email is $_email , password is $_password");
+          _loginFormKey.currentState!.save();
+          _auth.loginWithEmailAndPassword(_email!, _password!);
+          //print("Email is $_email , password is $_password");
+        }
+      },
     );
   }
 
