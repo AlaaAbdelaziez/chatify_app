@@ -8,6 +8,7 @@ import '../providers/authentication_provider.dart';
 
 //Widgets
 import '../widgets/top_bar.dart';
+import '../widgets/custom_list_view_tiles.dart';
 
 class ChatsPage extends StatefulWidget {
   @override
@@ -54,6 +55,15 @@ class _ChatsPageState extends State<ChatsPage> {
                 color: Color.fromARGB(255, 28, 169, 145),
               ),
             ),
+          ),
+          CustomListViewTilesWithActivity(
+            height: _deviceHeight * 0.15,
+            title: 'Hussain Mostafa',
+            subTitle: 'Hello',
+            imagePath: 'https://i.pravatar.cc/300',
+            isActive: true,
+            isActivity: false,
+            onTap: () {},
           ),
         ],
       ),
