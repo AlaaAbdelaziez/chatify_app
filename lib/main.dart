@@ -43,8 +43,12 @@ class MainApp extends StatelessWidget {
         title: 'Chatify',
         theme: ThemeData(
           scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            backgroundColor: Color.fromARGB(255, 253, 245, 230),
+            backgroundColor: Color.fromARGB(255, 255, 255, 255),
+            selectedItemColor: Color.fromARGB(255, 28, 169, 145),
           ),
         ),
         navigatorKey: NavigationService.navigatorKey,
