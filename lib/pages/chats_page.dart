@@ -11,6 +11,11 @@ import '../providers/chats_page_provider.dart';
 import '../widgets/top_bar.dart';
 import '../widgets/custom_list_view_tiles.dart';
 
+//Models
+import '../models/chat.dart';
+import '../models/chat_user.dart';
+import '../models/chat_message.dart';
+
 class ChatsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -78,17 +83,49 @@ class _ChatsPageState extends State<ChatsPage> {
   }
 
   Widget _ChatsList() {
-    return Expanded(child: _ChatTile());
+    List<Chat>? _chats = _pageProvider.chats;
+
+    return Expanded(
+      child: (() {
+        if (_chats != null) {
+          if (_chats.length != 0) {
+            return ListView.builder(
+              itemCount: _chats.length,
+              itemBuilder: (BuildContext _context, int _index) {
+                return _ChatTile(_chats[_index]);
+              },
+            );
+          } else {
+            return Center(
+              child: Text(
+                'No chats found',
+                style: TextStyle(color: Colors.black),
+              ),
+            );
+          }
+        } else {
+          return Center(child: CircularProgressIndicator(color: Colors.black));
+        }
+      })(),
+    );
   }
 
-  Widget _ChatTile() {
+  Widget _ChatTile(Chat _chat) {
+    List<ChatUser> _recepients = _chat.recepients();
+    bool _isActive = _recepients.any((_d) => _d.wasRecentlyActive());
+    String _subtitleText = '';
+    if (_chat.messages.isNotEmpty) {
+      _subtitleText = _chat.messages.first.type != MessageType.TEXT
+          ? "Media Attachment"
+          : _chat.messages.first.content;
+    }
     return CustomListViewTilesWithActivity(
       height: _deviceHeight * 0.15,
-      title: 'Hussain Mostafa',
-      subTitle: 'Hello',
-      imagePath: 'https://i.pravatar.cc/300',
-      isActive: true,
-      isActivity: false,
+      title: _chat.title(),
+      subTitle: _subtitleText,
+      imagePath: _chat.imageUrl(),
+      isActive: _isActive,
+      isActivity: _chat.activity,
       onTap: () {},
     );
   }
