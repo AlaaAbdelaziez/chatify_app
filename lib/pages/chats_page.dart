@@ -56,17 +56,26 @@ class _ChatsPageState extends State<ChatsPage> {
               ),
             ),
           ),
-          CustomListViewTilesWithActivity(
-            height: _deviceHeight * 0.15,
-            title: 'Hussain Mostafa',
-            subTitle: 'Hello',
-            imagePath: 'https://i.pravatar.cc/300',
-            isActive: true,
-            isActivity: false,
-            onTap: () {},
-          ),
+          ///////////
+          _ChatsList(),
         ],
       ),
+    );
+  }
+
+  Widget _ChatsList() {
+    return Expanded(child: _ChatTile());
+  }
+
+  Widget _ChatTile() {
+    return CustomListViewTilesWithActivity(
+      height: _deviceHeight * 0.15,
+      title: 'Hussain Mostafa',
+      subTitle: 'Hello',
+      imagePath: 'https://i.pravatar.cc/300',
+      isActive: true,
+      isActivity: false,
+      onTap: () {},
     );
   }
 }

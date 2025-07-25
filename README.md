@@ -1,16 +1,23 @@
 # chatify_app
 
-A new Flutter project.
+A feature-rich real-time chat application built using **Flutter**, with **Firebase** for authentication and real-time messaging, and **Cloudinary** for media storage.
 
-## Getting Started
+## Key Features
+- **Firebase Authentication** (Sign in/up with email or Google)
+- **1-on-1 and Group Chat** support
+- **Real-time messaging** using Firestore
+- **Send/receive images** with Cloudinary integration
+- **User presence & active status** (Online/Offline)
 
-This project is a starting point for a Flutter application.
+- **Typing indicator**
 
-A few resources to get you started if this is your first Flutter project:
+## 🔧 Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+| Technology   | Usage                                      |
+|--------------|---------------------------------------------|
+| Flutter      | Frontend development (Dart)                |
+| Firebase     | Authentication, Firestore, Push notifications |
+| Cloudinary   | Image upload and media delivery            |
+| Provider | State management                    |
+| Firestore    | Realtime NoSQL database 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
