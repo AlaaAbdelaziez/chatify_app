@@ -11,7 +11,7 @@ A feature-rich real-time chat application built using **Flutter**, with **Fireba
 
 - **Typing indicator**
 
-## 🔧 Tech Stack
+##  Tech Stack
 
 | Technology   | Usage                                      |
 |--------------|---------------------------------------------|
