@@ -29,10 +29,10 @@ class ChatMessage {
         _messageType = MessageType.UNKOWN;
     }
     return ChatMessage(
-      senderID: _json['senderID'],
+      senderID: _json['sender_id'],
       type: _messageType,
       content: _json['content'],
-      sentTime: _json['sentTime'].toDate(),
+      sentTime: _json['sent_time'].toDate(),
     );
   }
   Map<String, dynamic> toJason() {
