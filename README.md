@@ -16,7 +16,7 @@ A feature-rich real-time chat application built using **Flutter**, with **Fireba
 | Technology   | Usage                                      |
 |--------------|---------------------------------------------|
 | Flutter      | Frontend development (Dart)                |
-| Firebase     | Authentication, Firestore, Push notifications |
+| Firebase     | Authentication, Firestore|
 | Cloudinary   | Image upload and media delivery            |
 | Provider | State management                    |
 | Firestore    | Realtime NoSQL database 
