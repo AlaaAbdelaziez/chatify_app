@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 const String USER_COLLECTION = "Users";
 const String CHAT_COLLECTION = "Chats";
-const String MESSAGES_COLLECTION = "Messages";
+const String MESSAGES_COLLECTION = "messages";
 
 class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -27,6 +27,23 @@ class DatabaseService {
 
   Future<DocumentSnapshot> getUser(String _id) async {
     return _db.collection(USER_COLLECTION).doc(_id).get();
+  }
+
+  Stream<QuerySnapshot> getChatsForUSer(String _id) {
+    return _db
+        .collection(CHAT_COLLECTION)
+        .where('members', arrayContains: _id)
+        .snapshots();
+  }
+
+  Future<QuerySnapshot> getLastMessageForChat(String _chatID) {
+    return _db
+        .collection(CHAT_COLLECTION)
+        .doc(_chatID)
+        .collection(MESSAGES_COLLECTION)
+        .orderBy('sent_time', descending: true)
+        .limit(1)
+        .get();
   }
 
   Future<void> updateUserLastSeenTime(String _id) async {
