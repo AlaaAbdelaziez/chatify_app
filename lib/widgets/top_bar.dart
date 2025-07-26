@@ -16,7 +16,7 @@ class TopBar extends StatelessWidget {
     this.primaryAction,
     this.secondaryAction,
     this.size,
-    this.fontSize = 35,
+    this.fontSize = 16,
   });
 
   @override
@@ -44,13 +44,15 @@ class TopBar extends StatelessWidget {
   }
 
   Widget _titleBar() {
-    return Text(
-      _barTitle,
-      overflow: TextOverflow.ellipsis,
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: fontSize,
-        fontWeight: FontWeight.w700,
+    return Expanded(
+      child: Text(
+        _barTitle,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: fontSize,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }
