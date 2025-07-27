@@ -85,14 +85,18 @@ class _ChatPageState extends State<ChatPage> {
                         Icons.delete,
                         color: Color.fromARGB(255, 28, 169, 145),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _pageProvider.deleteChat();
+                      },
                     ),
                     secondaryAction: IconButton(
                       icon: Icon(
                         Icons.arrow_back,
                         color: Color.fromARGB(255, 28, 169, 145),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _pageProvider.goBack();
+                      },
                     ),
                   ),
                   _messagesListView(),
