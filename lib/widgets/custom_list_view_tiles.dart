@@ -96,10 +96,10 @@ class CustomChatListViewTile extends StatelessWidget {
               ? RoundedImageNetwork(
                   key: UniqueKey(),
                   imagePath: sender.imageURL,
-                  size: width * 0.04,
+                  size: width * 0.13,
                 )
               : Container(),
-          SizedBox(width: width * 0.05),
+          SizedBox(width: width * 0.03),
           message.type == MessageType.TEXT
               ? TextMessageBubble(
                   isOwnMessage: isOwnMessage,
@@ -107,7 +107,12 @@ class CustomChatListViewTile extends StatelessWidget {
                   height: deviceHeight * 0.06,
                   width: width,
                 )
-              : Text(message.content),
+              : ImageMessageBubble(
+                  isOwnMessage: isOwnMessage,
+                  message: message,
+                  height: deviceHeight * 0.30,
+                  width: width * 0.55,
+                ),
         ],
       ),
     );

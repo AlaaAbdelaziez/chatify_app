@@ -96,6 +96,7 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   _messagesListView(),
+                  _sendMessageForm(),
                 ],
               ),
             ),
@@ -118,7 +119,7 @@ class _ChatPageState extends State<ChatPage> {
               return Container(
                 child: CustomChatListViewTile(
                   deviceHeight: _deviceHeight,
-                  width: _deviceWidth * 0.80,
+                  width: _deviceWidth * 0.70,
                   message: _message,
                   isOwnMessage: _isOwnMessage,
                   sender: this.widget.chat.members
@@ -141,5 +142,79 @@ class _ChatPageState extends State<ChatPage> {
     } else {
       return Center(child: CircularProgressIndicator(color: Colors.black));
     }
+  }
+
+  Widget _sendMessageForm() {
+    return Container(
+      height: _deviceHeight * 0.06,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(241, 241, 243, 1),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      margin: EdgeInsets.symmetric(
+        horizontal: _deviceWidth * 0.04,
+        vertical: _deviceWidth * 0.03,
+      ),
+      child: Form(
+        key: _messageFormState,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _messageTextField(),
+            _sendMessageButton(),
+            _imageMessageButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _messageTextField() {
+    return SizedBox(
+      width: _deviceWidth * 0.65,
+      child: CustomTextFormFiled(
+        onSaved: (_value) {
+          _pageProvider.message = _value;
+        },
+        hintText: 'Type a message',
+        regEx: r"^(?!\s*$).+",
+        obscureText: false,
+      ),
+    );
+  }
+
+  Widget _sendMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: IconButton(
+        icon: Icon(Icons.send, color: Color.fromARGB(255, 28, 169, 145)),
+        onPressed: () {
+          if (_messageFormState.currentState!.validate()) {
+            _messageFormState.currentState!.save();
+            _pageProvider.sendTextMessage();
+            _messageFormState.currentState!.reset();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _imageMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 28, 169, 145),
+        onPressed: () {
+          _pageProvider.sendImageMessage();
+        },
+        child: Icon(Icons.camera_enhance, color: Colors.white),
+      ),
+    );
   }
 }
