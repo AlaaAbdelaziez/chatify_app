@@ -61,6 +61,13 @@ class _UsersPageState extends State<UsersPage> {
               onPressed: () {},
             ),
           ),
+          CustomTextField(
+            onEditingComplete: (_value) {},
+            hintText: "Search..",
+            obscureText: false,
+            controller: _searchFieldTextEditingController,
+            icon: Icons.search,
+          ),
         ],
       ),
     );

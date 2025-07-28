@@ -31,7 +31,43 @@ class CustomTextFormFiled extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.black),
+        hintStyle: TextStyle(color: Colors.black26),
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final Function(String) onEditingComplete;
+  final String hintText;
+  final bool obscureText;
+  final TextEditingController controller;
+  IconData? icon;
+  CustomTextField({
+    required this.onEditingComplete,
+    required this.hintText,
+    required this.obscureText,
+    required this.controller,
+    this.icon,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onEditingComplete: () => onEditingComplete(controller.value.text),
+      cursorColor: Colors.black,
+      style: TextStyle(color: Colors.white),
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        fillColor: Color.fromARGB(255, 245, 245, 244),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none,
+        ),
+        hintText: hintText,
+        hintStyle: TextStyle(color: Colors.black26),
+        prefixIcon: Icon(icon, color: Colors.black26),
       ),
     );
   }
