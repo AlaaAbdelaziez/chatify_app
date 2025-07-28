@@ -35,9 +35,27 @@ class UsersPageProvider extends ChangeNotifier {
     _selectedUsers = [];
     _db = GetIt.instance.get<DatabaseService>();
     _navigation = GetIt.instance.get<NavigationService>();
+    getUSers();
   }
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void getUSers({String? name}) async {
+    _selectedUsers = [];
+    try {
+      _db.getUsers(name: name).then((_snapshot) {
+        users = _snapshot.docs.map((_doc) {
+          Map<String, dynamic> _data = _doc.data() as Map<String, dynamic>;
+          _data['uid'] = _doc.id;
+          return ChatUser.fromJason(_data);
+        }).toList();
+        notifyListeners();
+      });
+    } catch (e) {
+      print('Error getting Users.');
+      print(e);
+    }
   }
 }
