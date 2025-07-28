@@ -98,6 +98,7 @@ class _ChatPageState extends State<ChatPage> {
                         _pageProvider.goBack();
                       },
                     ),
+                    fontSize: 16,
                   ),
                   _messagesListView(),
                   _sendMessageForm(),

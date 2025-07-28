@@ -46,6 +46,23 @@ class _UsersPageState extends State<UsersPage> {
       ),
       height: _deviceHeight,
       width: _deviceWidth * 0.97,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TopBar(
+            'Users',
+            primaryAction: IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Color.fromARGB(255, 28, 169, 145),
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
