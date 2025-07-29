@@ -31,7 +31,7 @@ class CustomListViewTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: isSelected ? Icon(Icons.chat, color: Colors.black) : null,
+      trailing: isSelected ? Icon(Icons.check, color: Colors.black) : null,
       onTap: () => onTap(),
       minVerticalPadding: height * 0.2,
       leading: RoundedImageNetworkWithStatusIndicator(
