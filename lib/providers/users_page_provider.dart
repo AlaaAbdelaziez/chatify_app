@@ -79,7 +79,7 @@ class UsersPageProvider extends ChangeNotifier {
       DocumentReference? _doc = await _db.createChat({
         'is_group': _isGroup,
         'is_activity': false,
-        'memeber': _membersIds,
+        'members': _membersIds,
       });
       //navigate to chat page
       List<ChatUser> _members = [];
@@ -100,6 +100,9 @@ class UsersPageProvider extends ChangeNotifier {
           group: _isGroup,
         ),
       );
+      _selectedUsers = [];
+      notifyListeners();
+      _navigation.navigateToPage(_chatPage);
     } catch (e) {
       print("Error creating Chat");
       print(e);
