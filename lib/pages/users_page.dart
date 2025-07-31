@@ -70,11 +70,16 @@ class _UsersPageState extends State<UsersPage> {
                     Icons.logout,
                     color: Color.fromARGB(255, 28, 169, 145),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _auth.logout();
+                  },
                 ),
               ),
               CustomTextField(
-                onEditingComplete: (_value) {},
+                onEditingComplete: (_value) {
+                  _pageProvider.getUSers(name: _value);
+                  FocusScope.of(context).unfocus();
+                },
                 hintText: "Search..",
                 obscureText: false,
                 controller: _searchFieldTextEditingController,

@@ -56,7 +56,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       onEditingComplete: () => onEditingComplete(controller.value.text),
       cursorColor: Colors.black,
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.black),
       obscureText: obscureText,
       decoration: InputDecoration(
         fillColor: Color.fromARGB(255, 245, 245, 244),
